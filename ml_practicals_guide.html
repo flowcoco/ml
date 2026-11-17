@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Practical Codes & Viva Cheat Sheet</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --code-bg: #0b1120;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --border: #334155;
+            --success: #22c55e;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 24px 16px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        header h1 {
+            font-size: 1.85rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        header p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+        .nav-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 28px;
+            position: sticky;
+            top: 0;
+            background: rgba(15, 23, 42, 0.95);
+            padding: 12px 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-bar a {
+            text-decoration: none;
+            color: var(--text);
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .nav-bar a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .card-header h2 {
+            font-size: 1.25rem;
+            color: var(--accent);
+        }
+        .copy-btn {
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .copy-btn.copied {
+            border-color: var(--success);
+            color: var(--success);
+        }
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Consolas", "Monaco", monospace;
+            font-size: 0.88rem;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+        details {
+            margin-top: 14px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: #cbd5e1;
+            font-size: 0.92rem;
+            user-select: none;
+        }
+        summary:hover {
+            color: var(--accent);
+        }
+        .viva-list {
+            margin-top: 10px;
+            padding-left: 18px;
+            font-size: 0.92rem;
+            color: #cbd5e1;
+        }
+        .viva-list li {
+            margin-bottom: 8px;
+        }
+        .viva-list strong {
+            color: #f8fafc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 14px;
+            font-size: 0.9rem;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            text-align: left;
+        }
+        th {
+            background: var(--code-bg);
+            color: var(--accent);
+        }
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-top: 32px;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Machine Learning Practical Codes &amp; Viva Guide</h1>
+        <p>Shortened Exam-Ready Python Implementations (Experiments 1–10) &amp; Core Viva Concepts</p>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="#exp1">Exp 1: Regression</a>
+        <a href="#exp2">Exp 2: Decision Tree</a>
+        <a href="#exp3">Exp 3: K-Means</a>
+        <a href="#exp4">Exp 4: PCA</a>
+        <a href="#exp5">Exp 5: RF vs GB</a>
+        <a href="#exp6">Exp 6: ANN</a>
+        <a href="#exp7">Exp 7: CNN</a>
+        <a href="#exp8">Exp 8: RNN</a>
+        <a href="#exp9">Exp 9: ResNet18</a>
+        <a href="#exp10">Exp 10: GAN</a>
+        <a href="#bagging-boosting">Bagging vs Boosting</a>
+    </nav>
+
+    <!-- EXP 1 -->
+    <section class="card" id="exp1">
+        <div class="card-header">
+            <h2>Exp 1: Linear &amp; Logistic Regression</h2>
+            <button class="copy-btn" onclick="copyCode('code1', this)">Copy Code</button>
+        </div>
+        <pre><code id="code1">from sklearn.datasets import fetch_california_housing, load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.metrics import mean_squared_error, r2_score, accuracy_score
+
+# 1. Linear Regression
+X, y = fetch_california_housing(return_X_y=True)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
+lr = LinearRegression().fit(X_tr, y_tr)
+pred = lr.predict(X_te)
+print("Linear MSE:", mean_squared_error(y_te, pred), "R2:", r2_score(y_te, pred))
+
+# 2. Logistic Regression
+X, y = load_breast_cancer(return_X_y=True)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
+sc = StandardScaler()
+log = LogisticRegression(max_iter=1000).fit(sc.fit_transform(X_tr), y_tr)
+print("Logistic Acc:", accuracy_score(y_te, log.predict(sc.transform(X_te))))</code></pre>
+        <details>
+            <summary>Quick Viva Q&amp;A</summary>
+            <ul class="viva-list">
+                <li><strong>Why is Logistic Regression called "regression"?</strong> It computes a linear weighted sum of inputs and passes it through a Sigmoid function to output probabilities between 0 and 1.</li>
+                <li><strong>Why Cross-Entropy instead of MSE for Logistic Regression?</strong> MSE with Sigmoid produces a non-convex loss surface with local minima; Cross-Entropy ensures a smooth convex curve.</li>
+            </ul>
+        </details>
+    </section>
+
+    <!-- EXP 2 -->
+    <section class="card" id="exp2">
+        <div class="card-header">
+            <h2>Exp 2: Decision Tree Classifier</h2>
+            <button class="copy-btn" onclick="copyCode('code2', this)">Copy Code</button>
+        </div>
+        <pre><code id="code2">from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, export_text
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+iris = load_iris()
+X_tr, X_te, y_tr, y_te = train_test_split(iris.data, iris.target, test_size=0.2, random_state=42)
+
+dt = DecisionTreeClassifier(criterion='gini', max_depth=3, random_state=42).fit(X_tr, y_tr)
+y_pred = dt.predict(X_te)
+
+print("Accuracy:", accuracy_score(y_te, y_pred))
+print("Confusion Matrix:
+", confusion_matrix(y_te, y_pred))
+print(export_text(dt, feature_names=iris.feature_names))</code></pre>
+        <details>
+            <summary>Quick Viva Q&amp;A</summary>
+            <ul class="viva-list">
+                <li><strong>Gini vs. Entropy:</strong> Both measure node impurity. Gini ($1 - \sum p^2$) is faster to compute without logarithms and is Scikit-learn's default.</li>
+                <li><strong>Why set <code>max_depth=3</code>?</strong> Pre-pruning to prevent overfitting on training noise. Feature scaling is not required for trees.</li>
+            </ul>
+        </details>
+    </section>
+
+    <!-- EXP 3 -->
+    <section class="card" id="exp3">
+        <div class="card-header">
+            <h2>Exp 3: K-Means Clustering</h2>
+            <button class="copy-btn" onclick="copyCode('code3', this)">Copy Code</button>
+        </div>
+        <pre><code id="code3">import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+
+X, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.6, random_state=42)
+
+# Elbow Method
+inertia = [KMeans(n_clusters=k, n_init=10, random_state=42).fit(X).inertia_ for k in range(1, 11)]
+
+# Fit K=4
+km = KMeans(n_clusters=4, n_init=10, random_state=42)
+y_km = km.fit_predict(X)
+print("Inertia:", km.inertia_)
+
+# Plot
+plt.subplot(1, 2, 1); plt.plot(range(1, 11), inertia, 'bo-'); plt.title('Elbow Method')
+plt.subplot(1, 2, 2); plt.scatter(X[:, 0], X[:, 1], c=y_km)
+plt.scatter(km.cluster_centers_[:, 0], km.cluster_centers_[:, 1], c='red', marker='X', s=200)
+plt.show()</code></pre>
+        <details>
+            <summary>Quick Viva Q&amp;A</summary>
+            <ul class="viva-list">
+                <li><strong>What is Inertia?</strong> Within-Cluster Sum of Squares (WCSS)—sum of squared distances from points to their assigned cluster centroid.</li>
+                <li><strong>Why <code>k-means++</code>?</strong> Places initial centroids far apart to avoid poor local optima caused by bad random initialization.</li>
+            </ul>
+        </details>
+    </section>
+
+    <!-- EXP 4 -->
+    <section class="card" id="exp4">
+        <div class="card-header">
+            <h2>Exp 4: Principal Component Analysis (PCA)</h2>
+            <button class="copy-btn" onclick="copyCode('code4', this)">Copy Code</button>
+        </div>
+        <pre><code id="code4">import matplotlib.pyplot as plt
+from sklearn.datasets import load_wine
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+
+wine = load_wine()
+X_scaled = StandardScaler().fit_transform(wine.data)
+
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+print("Explained Variance Ratio:", pca.explained_variance_ratio_)
+
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=wine.target, cmap='Set1')
+plt.xlabel('PC1'); plt.ylabel('PC2'); plt.title('PCA on Wine Dataset')
+plt.show()</code></pre>
+        <details>
+            <summary>Quick Viva Q&amp;A</summary>
+            <ul class="viva-list">
+                <li><strong>Why is <code>StandardScaler</code> mandatory?</strong> PCA maximizes variance; unscaled features with large numeric ranges would falsely dominate the principal components.</li>
+                <li><strong>Are Principal Components correlated?</strong> No, they are orthogonal (uncorrelated) eigenvectors of the covariance matrix.</li>
+            </ul>
+        </details>
+    </section>
+
+    <!-- EXP 5 -->
+    <section class="card" id="exp5">
+        <div class="card-header">
+            <h2>Exp 5: Random Forest vs. Gradient Boosting</h2>
+            <button class="copy-btn" onclick="copyCode('code5', this)">Copy Code</button>
+        </div>
+        <pre><code id="code5">from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.metrics import accuracy_score, f1_score
+
+X, y = load_breast_cancer(return_X_y=True)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
+
+for name, model in [("Random Forest", RandomForestClassifier(random_state=42)),
+                    ("Gradient Boosting", GradientBoostingClassifier(random_state=42))]:
+    model.fit(X_tr, y_tr)
+    pred = model.predict(X_te)
+    print(f"{name} -> Acc: {accuracy_score(y_te, pred):.4f}, F1: {f1_score(y_te, pred):.4f}")</code></pre>
+        <details>
+            <summary>Quick Viva Q&amp;A</summary>
+            <ul class="viva-list">
+                <li><strong>How does Random Forest differ from standard Bagging?</strong> Besides bootstrapping rows, it picks a random subset of features at every split to decorrelate trees.</li>
+            </ul>
+        </details>
+    </section>
+
+    <!-- EXP 6 -->
+    <section class="card" id="exp6">
+        <div class="card-header">
+            <h2>Exp 6: Simple Neural Network (ANN Binary Classification)</h2>
+            <button class="copy-btn" onclick="copyCode('code6', this)">Copy Code</button>
+        </div>
+        <pre><code id="code6">from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+X, y = make_classification(n_samples=1000, n_features=10, random_state=42)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
+sc = StandardScaler()
+X_tr, X_te = sc.fit_transform(X_tr), sc.transform(X_te)
+
+model = Sequential([
+    Dense(16, activation='relu', input_shape=(10,)),
+    Dropout(0.2),
+    Dense(8, activation='relu'),
+    Dense(1, activation='sigmoid')
+])
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+model.fit(X_tr, y_tr, epochs=20, batch_size=32, verbose=0)
+print("Test Accuracy:", model.evaluate(X_te, y_te, verbose=0)[1])</code></pre>
+        <details>
+            <summary>Quick Viva Q&amp;A</summary>
+            <ul class="viva-list">
+                <li><strong>Why ReLU in hidden layers and Sigmoid in output?</strong> ReLU prevents vanishing gradients; Sigmoid outputs class probabilities in $[0, 1]$.</li>
+                <li><strong>What does <code>Dropout(0.2)</code> do?</strong> Randomly drops 20% of neurons during training to prevent overfitting.</li>
+            </ul>
+        </details>
+    </section>
+
+    <!-- EXP 7 -->
+    <section class="card" id="exp7">
+        <div class="card-header">
+            <h2>Exp 7: Convolutional Neural Network (CNN on MNIST)</h2>
+            <button class="copy-btn" onclick="copyCode('code7', this)">Copy Code</button>
+        </div>
+        <pre><code id="code7">from tensorflow.keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+
+(X_tr, y_tr), (X_te, y_te) = mnist.load_data()
+X_tr, X_te = X_tr.reshape(-1, 28, 28, 1) / 255.0, X_te.reshape(-1, 28, 28, 1) / 255.0
+
+model = Sequential([
+    Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+    MaxPooling2D((2, 2)),
+    Flatten(),
+    Dense(64, activation='relu'),
+    Dense(10, activation='softmax')
+])
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.fit(X_tr, y_tr, epochs=3, batch_size=64)
+print("Test Acc:", model.evaluate(X_te, y_te, verbose=0)[1])</code></pre>
+        <details>
+            <summary>Quick Viva Q&amp;A</summary>
+            <ul class="viva-list">
+                <li><strong>Why CNN over ANN for images?</strong> Preserves 2D spatial hierarchies and uses weight sharing (filters), drastically reducing parameters.</li>
+                <li><strong>Why <code>sparse_categorical_crossentropy</code>?</strong> Labels are integers (0–9) instead of one-hot encoded vectors.</li>
+            </ul>
+        </details>
+    </section>
+
+    <!-- EXP 8 -->
+    <section class="card" id="exp8">
+        <div class="card-header">
+            <h2>Exp 8: Recurrent Neural Network (RNN on IMDB)</h2>
+            <button class="copy-btn" onclick="copyCode('code8', this)">Copy Code</button>
+        </div>
+        <pre><code id="code8">from tensorflow.keras.datasets import imdb
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Embedding, SimpleRNN, Dense
+
+(X_tr, y_tr), (X_te, y_te) = imdb.load_data(num_words=10000)
+X_tr, X_te = pad_sequences(X_tr, maxlen=200), pad_sequences(X_te, maxlen=200)
+
+model = Sequential([
+    Embedding(10000, 32, input_length=200),
+    SimpleRNN(32),
+    Dense(1, activation='sigmoid')
+])
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+model.fit(X_tr, y_tr, epochs=3, batch_size=64)
+print("Test Acc:", model.evaluate(X_te, y_te, verbose=0)[1])</code></pre>
+        <details>
+            <summary>Quick Viva Q&amp;A</summary>
+            <ul class="viva-list">
+                <li><strong>Role of <code>Embedding</code> layer:</strong> Converts integer word IDs into dense semantic vectors.</li>
+                <li><strong>Limitation of <code>SimpleRNN</code>:</strong> Vanishing gradient on long sequences (solved by LSTM/GRU).</li>
+            </ul>
+        </details>
+    </section>
+
+    <!-- EXP 9 -->
+    <section class="card" id="exp9">
+        <div class="card-header">
+            <h2>Exp 9: Fine-Tune Pretrained ResNet18 (PyTorch)</h2>
+            <button class="copy-btn" onclick="copyCode('code9', this)">Copy Code</button>
+        </div>
+        <pre><code id="code9">import torch, torch.nn as nn, torch.optim as optim
+from torchvision import datasets, transforms, models
+from torch.utils.data import DataLoader, Subset
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+tf = transforms.Compose([transforms.Resize((64, 64)), transforms.ToTensor()])
+
+train_ds = datasets.CIFAR10('./data', train=True, download=True, transform=tf)
+test_ds = datasets.CIFAR10('./data', train=False, download=True, transform=tf)
+
+train_sub = Subset(train_ds, [i for i, y in enumerate(train_ds.targets) if y in [0, 1]])
+test_sub = Subset(test_ds, [i for i, y in enumerate(test_ds.targets) if y in [0, 1]])
+train_loader = DataLoader(train_sub, batch_size=32, shuffle=True)
+test_loader = DataLoader(test_sub, batch_size=32)
+
+model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
+for p in model.parameters(): p.requires_grad = False
+for p in model.layer4.parameters(): p.requires_grad = True
+model.fc = nn.Linear(model.fc.in_features, 2)
+model.to(device)
+
+opt = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=0.001)
+loss_fn = nn.CrossEntropyLoss()
+
+for epoch in range(2):
+    for x, y in train_loader:
+        x, y = x.to(device), y.to(device)
+        opt.zero_grad(); loss_fn(model(x), y).backward(); opt.step()
+
+model.eval()
+correct = sum((model(x.to(device)).argmax(1) == y.to(device)).sum().item() for x, y in test_loader)
+print("Test Acc:", correct / len(test_sub))</code></pre>
+        <details>
+            <summary>Quick Viva Q&amp;A</summary>
+            <ul class="viva-list">
+                <li><strong>Feature Extraction vs. Fine-Tuning:</strong> Feature extraction freezes all conv layers and trains only <code>fc</code>. Fine-tuning also unfreezes top layers (<code>layer4</code>) to adapt high-level features.</li>
+                <li><strong>What is a Residual Connection?</strong> Skip connection ($F(x) + x$) that prevents vanishing gradients in very deep networks.</li>
+            </ul>
+        </details>
+    </section>
+
+    <!-- EXP 10 -->
+    <section class="card" id="exp10">
+        <div class="card-header">
+            <h2>Exp 10: Generative Adversarial Network (GAN on MNIST)</h2>
+            <button class="copy-btn" onclick="copyCode('code10', this)">Copy Code</button>
+        </div>
+        <pre><code id="code10">import numpy as np, matplotlib.pyplot as plt, tensorflow as tf
+from tensorflow.keras.layers import Dense, Reshape, Flatten, LeakyReLU
+from tensorflow.keras.models import Sequential
+
+(X_tr, _), _ = tf.keras.datasets.mnist.load_data()
+X_tr = (X_tr.reshape(-1, 28, 28, 1) - 127.5) / 127.5
+
+gen = Sequential([Dense(256, input_dim=100), LeakyReLU(0.2), Dense(784, activation='tanh'), Reshape((28, 28, 1))])
+disc = Sequential([Flatten(input_shape=(28, 28, 1)), Dense(256), LeakyReLU(0.2), Dense(1, activation='sigmoid')])
+disc.compile(optimizer='adam', loss='binary_crossentropy')
+
+disc.trainable = False
+gan = Sequential([gen, disc])
+gan.compile(optimizer='adam', loss='binary_crossentropy')
+
+for epoch in range(1001):
+    real = X_tr[np.random.randint(0, X_tr.shape[0], 64)]
+    fake = gen.predict(np.random.normal(0, 1, (64, 100)), verbose=0)
+    disc.train_on_batch(real, np.ones((64, 1)))
+    disc.train_on_batch(fake, np.zeros((64, 1)))
+    gan.train_on_batch(np.random.normal(0, 1, (64, 100)), np.ones((64, 1)))
+
+imgs = gen.predict(np.random.normal(0, 1, (5, 100)), verbose=0)
+for i in range(5): plt.subplot(1, 5, i+1); plt.imshow(imgs[i, :, :, 0], cmap='gray'); plt.axis('off')
+plt.show()</code></pre>
+        <details>
+            <summary>Quick Viva Q&amp;A</summary>
+            <ul class="viva-list">
+                <li><strong>Why normalize to $[-1, 1]$?</strong> Matches the Generator's final <code>tanh</code> output range.</li>
+                <li><strong>Why <code>disc.trainable = False</code> in combined GAN?</strong> Freezes Discriminator weights during Generator updates so only the Generator improves at fooling it.</li>
+            </ul>
+        </details>
+    </section>
+
+    <!-- BAGGING VS BOOSTING -->
+    <section class="card" id="bagging-boosting">
+        <div class="card-header">
+            <h2>Core Viva Topic: Bagging vs. Boosting</h2>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Bagging (Bootstrap Aggregating)</th>
+                    <th>Boosting</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Training Style</strong></td>
+                    <td>Parallel (independent models)</td>
+                    <td>Sequential (each fixes previous errors)</td>
+                </tr>
+                <tr>
+                    <td><strong>Primary Goal</strong></td>
+                    <td>Reduces <strong>Variance</strong> (prevents overfitting)</td>
+                    <td>Reduces <strong>Bias</strong> (converts weak to strong learners)</td>
+                </tr>
+                <tr>
+                    <td><strong>Sampling</strong></td>
+                    <td>Bootstrap sampling (with replacement; ~36.8% Out-of-Bag)</td>
+                    <td>Focuses on misclassified points / residual errors</td>
+                </tr>
+                <tr>
+                    <td><strong>Base Learners</strong></td>
+                    <td>Deep, unpruned trees</td>
+                    <td>Shallow trees / decision stumps</td>
+                </tr>
+                <tr>
+                    <td><strong>Examples</strong></td>
+                    <td>Random Forest, Bagged Trees</td>
+                    <td>Gradient Boosting, AdaBoost, XGBoost</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        Ready to host on GitHub Pages, Netlify Drop, or Vercel. Good luck on your ML exam!
+    </footer>
+</div>
+
+<script>
+    function copyCode(elementId, btn) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const original = btn.innerText;
+            btn.innerText = "Copied!";
+            btn.classList.add("copied");
+            setTimeout(() => {
+                btn.innerText = original;
+                btn.classList.remove("copied");
+            }, 1800);
+        });
+    }
+</script>
+</body>
+</html>
